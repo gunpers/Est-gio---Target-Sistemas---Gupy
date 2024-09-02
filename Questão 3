@@ -1,0 +1,24 @@
+import json
+
+# Supondo que os dados de faturamento estejam em um arquivo JSON
+dados_faturamento = '''
+{
+    "faturamento_diario": [0, 1200.50, 3000.75, 0, 4500.60, 0, 0, 5500.30, 6200.10, 0, 700.00, 800.25, 900.55, 0]
+}
+'''
+
+# Convertendo o JSON para um dicionário Python
+faturamento = json.loads(dados_faturamento)['faturamento_diario']
+
+# Calculando o menor, maior e a média (ignorando dias sem faturamento)
+faturamento_valido = [valor for valor in faturamento if valor > 0]
+menor_faturamento = min(faturamento_valido)
+maior_faturamento = max(faturamento_valido)
+media_mensal = sum(faturamento_valido) / len(faturamento_valido)
+
+# Contando os dias com faturamento acima da média
+dias_acima_da_media = sum(1 for valor in faturamento_valido if valor > media_mensal)
+
+print(f'Menor faturamento: R${menor_faturamento:.2f}')
+print(f'Maior faturamento: R${maior_faturamento:.2f}')
+print(f'Dias com faturamento acima da média: {dias_acima_da_media}')
