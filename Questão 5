@@ -1,0 +1,3 @@
+string = input('Digite uma string: ')
+string_invertida = string[::-1]
+print(f'String invertida: {string_invertida}')
